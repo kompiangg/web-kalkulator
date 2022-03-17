@@ -25,7 +25,7 @@ jobs:
         with:
           server: ${{ env.SERVER }}
           username: ${{ env.USERNAME }}
-          password: ${{ secret.FTP_PASSWORD }}
+          password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./build/
           server_dir: ./public_html/
           protocol: ftps
