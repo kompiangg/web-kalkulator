@@ -27,4 +27,4 @@ jobs:
           username: ${{ env.USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: build/
-          server_dir: home/kompiang/public_html/.
+          server-dir: public_html/.
