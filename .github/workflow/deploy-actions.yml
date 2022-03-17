@@ -1,0 +1,31 @@
+env:
+  SERVER: ftp.kompiangg.com
+  USERNAME: kompiang
+
+on:
+  push:
+    branches:
+      - 'release'
+
+name: Deploy the website
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: |
+          npm install
+          npm run build
+      - name: Publish to main hosting
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: ${{ env.SERVER }}
+          username: ${{ env.USERNAME }}
+          password: ${{ secret.FTP_PASSWORD }}
+          local-dir: ./build/
+          server_dir: ./public_html/
+          protocol: ftps
